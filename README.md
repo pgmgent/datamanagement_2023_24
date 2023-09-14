@@ -1,2 +1,2 @@
-# datamanagement_2023_24
-Oplossing van de oefeningen uit de les
+# Code voorbeelden uit de les Datamanagement 2023-24
+In deze repository vind je de code voorbeelden en oplossingen op oefening uit de les.
