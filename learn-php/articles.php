@@ -1,20 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+
     <?php
+    include_once 'partial/header.php';
 
-    //connecteren met db via PDO
-    //1. connectie maken met db
-    CONST DB_DSN = 'mysql:dbname=db;host=db;port=3306';
-    CONST DB_USER = 'db';
-    CONST DB_PWD = 'db';
-
-    $pdo = new PDO(DB_DSN, DB_USER, DB_PWD);
+    require_once 'includes/db.php';
+    
 
     //2. query schrijven
     $query = "SELECT * FROM articles WHERE title like '%a%'";
@@ -28,11 +17,9 @@
     //5. resultaat tonen
 
     foreach($articles as $article){
-        echo "<h1>" . $article['title'] . "</h1>";
-        echo "<p>" . $article['content'] . "</p>";
+        echo "<li><a href=\"article.php?id={$article['article_id']}\">{$article['title']}</a></li>";
     }
 
+    include_once 'partial/footer.php';
 
     ?>
-</body>
-</html>
