@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule ^/article/(.*)$ /article.php?id=$1 [R=301, L]
