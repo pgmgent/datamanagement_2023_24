@@ -12,38 +12,32 @@
 //1. connectie maken met db
 require_once 'includes/db.php';
 
+$id = $_GET['id'] ?? 0;
+
  //2. query schrijven
  $query = "
     SELECT * 
-    FROM `message`
-    INNER JOIN `users` ON `message`.`user_id` = `users`.`user_id`
-    ORDER BY `message_id` DESC 
-    LIMIT 20";
+    FROM `users`
+    WHERE `user_id` = :user_id";
 
  //3. query uitvoeren
- $statement = $db->prepare($query);
- $statement->execute();
+    //3.1 query voorbereiden
+        $statement = $db->prepare($query);
+    //3.2 parameters binden
+        $statement->bindValue(':user_id', $id);
+    //3.3 query uitvoeren
+        $statement->execute();
 
  //4. resultaat verwerken
- $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+ $user = $statement->fetch();
 
-// print_r($articles);
+ print_r($user);
 
 ?>
 
 <div class="container">
     <div class="messages">
-        <form method="POST" action="add_message.php">
-            <div class="message message-new">
-            
-                <div class="avatar">JD</div>
-
-                <div class="content">
-                    <textarea name="tweet"></textarea>
-                    <button type="submit">Tweet</button>
-                </div>
-            </div>
-        </form>
+        <h1></h1>
 
         <?php foreach($messages as $message) {
 
