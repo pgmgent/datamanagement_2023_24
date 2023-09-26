@@ -14,7 +14,7 @@ require_once 'includes/db.php';
 
 $id = $_GET['id'] ?? 0;
 
- //2. query schrijven
+ //user ophalen
  $query = "
     SELECT * 
     FROM `users`
@@ -31,14 +31,32 @@ $id = $_GET['id'] ?? 0;
  //4. resultaat verwerken
  $user = $statement->fetch();
 
- print_r($user);
+
+ //berichten ophalen
+ $query2 = "
+    SELECT * 
+    FROM `message`
+    INNER JOIN `users` ON `message`.`user_id` = `users`.`user_id`
+    WHERE `message`.`user_id` = :user_id
+    ORDER BY `message_id` DESC 
+    LIMIT 20";
+
+ //3. query uitvoeren
+ $statement = $db->prepare($query2);
+$statement->bindValue(':user_id', $id);
+ $statement->execute();
+
+ //4. resultaat verwerken
+ $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
 <div class="container">
     <div class="messages">
-        <h1></h1>
+        <h1><?= $user['first_name']; ?></h1>
+        <?= $user['email']; ?>
 
+        <h2><?= $user['first_name']; ?>'s messages</h2>
         <?php foreach($messages as $message) {
 
             include 'views/message.php';
