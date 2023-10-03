@@ -4,7 +4,7 @@
         <div class="info"><a href="user_detail.php?id=<?= $message['user_id']; ?>"><?= $message['first_name'] . ' ' . $message['last_name']; ?></a> &bull; @deweirdt &bull; <?= $message['created_on']; ?> Donderdag 1 oktober 2020 11:20</div>
         <div class="tweet">
             <?php //echo $message['message']; ?>
-            <?= $message['message']; ?>
+            <?= htmlspecialchars( $message['message'] ); ?>
         </div>
     </div>
 </div>
