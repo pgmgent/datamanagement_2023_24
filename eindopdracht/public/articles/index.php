@@ -1,5 +1,5 @@
 <?php
-require_once '../app.php';
+require_once '../../app.php';
 include_once "$dir/partial/header.php";
 ?>
 
@@ -13,6 +13,9 @@ include_once "$dir/partial/header.php";
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+        <div class="col text-end">
+            <a href="/articles/edit.php" class="btn btn-success">Add article</a>
         </div>
     </div>
 </form>

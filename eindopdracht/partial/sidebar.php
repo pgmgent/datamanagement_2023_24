@@ -9,7 +9,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="articles.php" class="nav-link align-middle px-0">
+            <a href="/articles/index.php" class="nav-link align-middle px-0">
                 <i class="fs-4 fa fa-fw fa-database"></i> <span class="ms-1 d-none d-sm-inline">Articles</span>
             </a>
         </li>
