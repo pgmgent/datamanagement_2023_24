@@ -48,8 +48,10 @@ if(count($_POST)) {
     <div class="mb-3">
         <select name="category_id" required>
             <option value="">Select a category</option>
-            <?php foreach($categories as $category): ?>
-                <option value="<?= $category->category_id; ?>" selected><?= $category->name; ?></option>
+            <?php foreach($categories as $category): 
+                $is_selected = ($article && $category->category_id == $article->category_id) ? 'selected' : '';
+                ?>
+                <option value="<?= $category->category_id; ?>" <?= $is_selected ?>><?= $category->name; ?></option>
             <?php endforeach; ?>
         </select>
 
