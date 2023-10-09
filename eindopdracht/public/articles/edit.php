@@ -5,6 +5,7 @@ include_once "$dir/partial/header.php";
 $id = $_GET['id'] ?? 0;
 
 $article = ($id) ? getArticleById($id) : null;
+$categories = getCategories();
 
 if(count($_POST)) {
     //Gebruiker heeft op submit geklikt
@@ -43,6 +44,20 @@ if(count($_POST)) {
     <div class="mb-3">
         <label for="content" class="form-label">Content</label>
         <textarea class="form-control" name="content" id="content" rows="3"><?= $_POST['content'] ?? $article->content ?? ''; ?></textarea>
+    </div>
+    <div class="mb-3">
+        <select name="category_id" required>
+            <option value="">Select a category</option>
+            <?php foreach($categories as $category): ?>
+                <option value="<?= $category->category_id; ?>" selected><?= $category->name; ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <?php foreach($categories as $category) : ?>
+            <input type="checkbox" name="categories[]" >
+        <?php endforeach; ?>
+
+
     </div>
     <input type="hidden" name="id" value="<?= $id; ?>">
     <button type="submit" class="btn btn-primary">Submit</button>

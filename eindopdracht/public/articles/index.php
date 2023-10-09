@@ -21,6 +21,19 @@ include_once "$dir/partial/header.php";
 </form>
 
 <div class="list-group">
+<div class="list-group-item bg-light">
+    <div class="row">
+        <div class="col-auto">
+            Title
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            Verberg bij kleiner worden
+        </div>
+        <div class="col-3">
+            Actions
+        </div>
+    </div>
+</div>
 <?php
 $search = $_GET['search'] ?? '';
 $articles = getArticles($search);
