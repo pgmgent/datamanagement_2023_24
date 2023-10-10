@@ -5,10 +5,14 @@ include_once "$dir/partial/header.php";
 $id = $_GET['id'] ?? 0;
 
 $article = ($id) ? getArticleById($id) : null;
+$article_categories = ($id) ? getCategoriesByArticle($id) : [];
 $categories = getCategories();
 
 if(count($_POST)) {
     //Gebruiker heeft op submit geklikt
+
+    print_r($_POST);
+
     $errors = [];
     //validatie
     $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -16,14 +20,14 @@ if(count($_POST)) {
         $errors[] = 'Title is required';
     }
     $content = filter_input(INPUT_POST, 'content');
-
+    $categories = $_POST['categories'] ?? [];
     if(count($errors) == 0) {
         if($id) {
             //update
-            updateArticle($id, $title, $content);
+            updateArticle($id, $title, $content, $categories);
         } else {
             //insert
-            insertArticle($title, $content);
+            insertArticle($title, $content, $categories);
         }
         redirect('/articles/index.php');
     }
@@ -33,7 +37,7 @@ if(count($_POST)) {
 
 <h1><?= ($id) ? 'Edit' : 'Add'; ?> article</h1>
 
-<?php displayErrors($errors); ?>
+<?php displayErrors($errors ?? []); ?>
 
 <form method="POST">
     <div class="mb-3">
@@ -46,7 +50,8 @@ if(count($_POST)) {
         <textarea class="form-control" name="content" id="content" rows="3"><?= $_POST['content'] ?? $article->content ?? ''; ?></textarea>
     </div>
     <div class="mb-3">
-        <select name="category_id" required>
+    <!--   ONE TO MANY 
+    <select name="category_id" required>
             <option value="">Select a category</option>
             <?php foreach($categories as $category): 
                 $is_selected = ($article && $category->category_id == $article->category_id) ? 'selected' : '';
@@ -54,9 +59,17 @@ if(count($_POST)) {
                 <option value="<?= $category->category_id; ?>" <?= $is_selected ?>><?= $category->name; ?></option>
             <?php endforeach; ?>
         </select>
-
-        <?php foreach($categories as $category) : ?>
-            <input type="checkbox" name="categories[]" >
+            -->
+        <?php foreach($categories as $category) : 
+            $is_selected = in_array($category->category_id, $article_categories) ? 'checked' : '';
+            ?>
+            <div><label>
+                <input type="checkbox" 
+                        name="categories[]" 
+                        value="<?= $category->category_id; ?>" 
+                        <?= $is_selected; ?>> 
+                    <?= $category->name ?>
+            </label></div>
         <?php endforeach; ?>
 
 
