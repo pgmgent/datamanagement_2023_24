@@ -11,3 +11,13 @@ function displayErrors($errors = []) {
         } 
     }
 }
+
+function checkLogin() {
+    //check if not on login page
+    if($_SERVER['REQUEST_URI'] == '/login.php' || $_SERVER['REQUEST_URI'] == '/register.php') {
+        return;
+    }
+    if(!isset($_SESSION['login'])) {
+        redirect('/login.php');
+    }
+}

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 //Current working directory
 $dir = __DIR__;
@@ -17,3 +18,6 @@ include_once "$dir/includes/db.php";
 include_once "$dir/functions/global.php";
 include_once "$dir/functions/articles.php";
 include_once "$dir/functions/categories.php";
+
+
+checkLogin();

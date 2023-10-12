@@ -2,6 +2,9 @@
 require_once '../app.php';
 include_once "$dir/partial/header.php";
 
+
+//controle op login en session aanmaken
+
 ?>
 
 <h1>Login</h1>

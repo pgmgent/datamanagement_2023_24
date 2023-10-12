@@ -17,7 +17,7 @@ if($login && $password) {
         $_SESSION['person'] = $login;
     } else {
         $_SESSION['person'] = null;
-        echo 'incorrect';
+        echo 'incorrect'; 
     }
 }
 
